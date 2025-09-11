@@ -1,6 +1,6 @@
-import { Module } from '@nestjs/common';
+import { Module, ValidationPipe } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { APP_FILTER } from '@nestjs/core';
+import { APP_FILTER, APP_PIPE } from '@nestjs/core';
 import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { LoggerModule } from 'nestjs-pino';
 
@@ -21,6 +21,15 @@ import { configuration, loggerOptions } from './config';
       inject: [ConfigService],
     }),
   ],
-  providers: [{ provide: APP_FILTER, useClass: ExceptionFilter }],
+  providers: [
+    { provide: APP_FILTER, useClass: ExceptionFilter },
+    {
+      provide: APP_PIPE,
+      useValue: new ValidationPipe({
+        transform: true,
+        whitelist: true,
+      }),
+    },
+  ],
 })
 export class AppModule {}
