@@ -33,6 +33,9 @@
     "class-validator": "^0.14.2",
     "cross-env": "^10.0.0",
     "mysql": "^2.18.1",
+    "nestjs-pino": "^4.4.0",
+    "pino": "^9.9.5",
+    "pino-http": "^10.5.0",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.1",
     "typeorm": "^0.3.26"
