@@ -3,10 +3,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { LoggerModule } from 'nestjs-pino';
 
-import { AppService } from './app.service';
 import { configuration, loggerOptions } from './config';
-import { UserRepository } from './shared/user/user.repository';
-import { MemberCurdService } from './user/providers/user.service';
 
 @Module({
   imports: [
@@ -22,6 +19,5 @@ import { MemberCurdService } from './user/providers/user.service';
       inject: [ConfigService],
     }),
   ],
-  providers: [AppService, MemberCurdService, UserRepository],
 })
 export class AppModule {}
