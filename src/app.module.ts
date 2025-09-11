@@ -1,11 +1,12 @@
 import { Module, ValidationPipe } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { APP_FILTER, APP_PIPE } from '@nestjs/core';
+import { APP_FILTER, APP_PIPE, RouterModule } from '@nestjs/core';
 import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { LoggerModule } from 'nestjs-pino';
 
 import { ExceptionFilter } from './common/filters';
 import { configuration, loggerOptions } from './config';
+import { MemberModule } from './user/user.module';
 
 @Module({
   imports: [
@@ -20,6 +21,12 @@ import { configuration, loggerOptions } from './config';
       }),
       inject: [ConfigService],
     }),
+    RouterModule.register([
+      {
+        path: 'member',
+        module: MemberModule,
+      },
+    ]),
   ],
   providers: [
     { provide: APP_FILTER, useClass: ExceptionFilter },
