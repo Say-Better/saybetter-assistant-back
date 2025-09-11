@@ -6,13 +6,13 @@ import { AppService } from './app.service';
 import GlobalConfigModule from './common/config/config.module';
 import { MysqlModule } from './common/db/mysql.module';
 import { LoggerModule } from './common/logger/logger.module';
-import { MemberRepository } from './user/repository/user.repository';
-import { MemberService } from './user/providers/user.service';
+import { UserRepository } from './shared/user/user.repository';
 import { MemberController } from './user/controllers/user.controller';
+import { MemberCurdService } from './user/providers/user.service';
 
 @Module({
   imports: [GlobalConfigModule, MysqlModule, LoggerModule],
   controllers: [AppController, MemberController],
-  providers: [AppService, MemberService, MemberRepository],
+  providers: [AppService, MemberCurdService, UserRepository],
 })
 export class AppModule {}

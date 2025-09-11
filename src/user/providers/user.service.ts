@@ -1,13 +1,12 @@
 import { Injectable } from '@nestjs/common';
 
-import { Member } from '../../entity/user.entity';
-import { MemberRepository } from '../repository/user.repository';
+import { UserService } from 'src/shared/user/user.service';
 
 @Injectable()
-export class MemberService {
-  constructor(private readonly memberRepository: MemberRepository) {}
+export class MemberCurdService {
+  constructor(private readonly memberService: UserService) {}
 
-  async test() {
-    return await this.memberRepository.save(Member.getInstance('testid', 'testpw'));
+  async save() {
+    return await this.memberService.save();
   }
 }

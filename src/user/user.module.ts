@@ -1,14 +1,14 @@
 import { Module } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
 
-import { MemberController } from './controllers/user.controller';
-import GlobalConfigModule from 'src/common/config/config.module';
-import { LoggerModule } from 'src/common/logger/logger.module';
-import { MemberRepository } from 'src/user/repository/user.repository';
-import { MemberService } from 'src/user/providers/user.service';
+import { Mysql as AppDB } from '#entity/mysql';
+import * as controllers from './controllers';
+import * as providers from './providers';
+import { UserModule } from 'src/shared/user';
 
 @Module({
-  imports: [GlobalConfigModule, LoggerModule],
-  controllers: [MemberController],
-  providers: [MemberService, MemberRepository],
+  imports: [TypeOrmModule.forFeature([AppDB]), UserModule],
+  controllers: Object.values(controllers),
+  providers: Object.values(providers),
 })
 export class MemberModule {}

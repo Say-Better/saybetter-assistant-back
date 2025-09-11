@@ -1,13 +1,13 @@
 import { Controller, Get } from '@nestjs/common';
 
-import { MemberService } from 'src/user/providers/user.service';
+import { MemberCurdService } from 'src/user/providers/user.service';
 
 @Controller('/member')
 export class MemberController {
-  constructor(private readonly memberService: MemberService) {}
+  constructor(private readonly memberService: MemberCurdService) {}
 
   @Get()
   async test() {
-    return await this.memberService.test();
+    return await this.memberService.save();
   }
 }
