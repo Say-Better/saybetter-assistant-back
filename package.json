@@ -16,6 +16,7 @@
     "start:stage": "cross-env NODE_ENV=stage nest start",
     "start:testProd": "cross-env NODE_ENV=stage nest start",
     "start:prod": "cross-env NODE_ENV=prod node dist/main",
+    "start:repl": "nest start --entryFile repl",
     "dev": "cross-env NODE_ENV=local nest start --watch",
     "debug": "cross-env NODE_ENV=local nest start --debug --watch",
     "=============[Build]=============": "",
