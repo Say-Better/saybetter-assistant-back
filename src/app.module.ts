@@ -6,8 +6,8 @@ import { AppService } from './app.service';
 import GlobalConfigModule from './common/config/config.module';
 import { MysqlModule } from './common/db/mysql.module';
 import { LoggerModule } from './common/logger/logger.module';
-import { MemberRepository } from './core/user/repository/user.repository';
-import { MemberService } from './core/user/service/user.service';
+import { MemberRepository } from './shared/user/repository/user.repository';
+import { MemberService } from './shared/user/service/user.service';
 import { MemberController } from './module/user/user.controller';
 
 @Module({

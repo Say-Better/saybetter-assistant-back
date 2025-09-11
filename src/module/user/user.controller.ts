@@ -1,6 +1,6 @@
 import { Controller, Get } from '@nestjs/common';
 
-import { MemberService } from 'src/core/user/service/user.service';
+import { MemberService } from 'src/shared/user/service/user.service';
 
 @Controller('/member')
 export class MemberController {
