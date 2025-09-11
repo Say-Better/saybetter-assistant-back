@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { TypeOrmOptionsFactory, TypeOrmModuleOptions } from '@nestjs/typeorm';
+
 import GlobalConfigService from '../config/config.service';
 import { AppLogger } from '../logger';
 import MysqlLogger from './mysql.logger';
 import { MysqlNamingStrategy } from './mysql.naming';
-
 
 @Injectable()
 export class MysqlConfigService implements TypeOrmOptionsFactory {
@@ -27,10 +27,10 @@ export class MysqlConfigService implements TypeOrmOptionsFactory {
       entities: ['dist/**/*.entity.js'],
       synchronize: false,
       poolSize: this.configService.mySqlCPSize,
-      connectTimeout: 20000,
+      connectTimeout: 20_000,
       extra: {
         keepAliveInitialDelay: 1000,
-        idleTimeout: 60000,
+        idleTimeout: 60_000,
         enableKeepAlive: true,
       },
     };

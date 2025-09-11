@@ -1,9 +1,5 @@
 import { plainToClass } from 'class-transformer';
-import {
-  validateSync,
-  IsEnum,
-  IsNumber,
-} from 'class-validator';
+import { validateSync, IsEnum, IsNumber } from 'class-validator';
 
 export enum EnvName {
   Local = 'local',
@@ -15,6 +11,7 @@ export enum EnvName {
 class EnvVariables {
   @IsEnum(EnvName)
   NODE_ENV: EnvName;
+
   @IsNumber()
   API_PORT: number;
 }

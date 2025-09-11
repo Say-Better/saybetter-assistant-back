@@ -1,4 +1,5 @@
 import { Injectable, LoggerService } from '@nestjs/common';
+
 import GlobalConfigService from '../config/config.service';
 
 @Injectable()
@@ -7,20 +8,25 @@ export class AppLogger implements LoggerService {
 
   private logMessage(level: string, message: string, meta?: object) {
     switch (level) {
-      case 'error':
+      case 'error': {
         console.error(`[ERROR] ${message}`, meta);
         break;
-      case 'warn':
+      }
+      case 'warn': {
         console.warn(`[WARN] ${message}`, meta);
         break;
-      case 'debug':
+      }
+      case 'debug': {
         console.debug(`[DEBUG] ${message}`, meta);
         break;
-      case 'verbose':
+      }
+      case 'verbose': {
         console.info(`[VERBOSE] ${message}`, meta);
         break;
-      default:
+      }
+      default: {
         console.log(`[INFO] ${message}`, meta);
+      }
     }
   }
 

@@ -1,7 +1,8 @@
-import { Injectable } from "@nestjs/common";
-import { Member } from "../entity/user.entity";
-import { BaseRepository } from "src/common/db/type-orm.base.repository";
-import { DataSource } from "typeorm";
+import { Injectable } from '@nestjs/common';
+import { DataSource } from 'typeorm';
+
+import { Member } from '../entity/user.entity';
+import { BaseRepository } from 'src/common/db/type-orm.base.repository';
 
 @Injectable()
 export class MemberRepository extends BaseRepository<Member> {

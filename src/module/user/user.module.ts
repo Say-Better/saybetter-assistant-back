@@ -1,16 +1,14 @@
-import { Module } from "@nestjs/common";
-import GlobalConfigModule from "src/common/config/config.module";
-import { LoggerModule } from "src/common/logger/logger.module";
-import { MemberRepository } from "src/core/user/repository/user.repository";
-import { MemberService } from "src/core/user/service/user.service";
-import { MemberController } from "./user.controller";
+import { Module } from '@nestjs/common';
+
+import { MemberController } from './user.controller';
+import GlobalConfigModule from 'src/common/config/config.module';
+import { LoggerModule } from 'src/common/logger/logger.module';
+import { MemberRepository } from 'src/core/user/repository/user.repository';
+import { MemberService } from 'src/core/user/service/user.service';
 
 @Module({
-    imports: [
-      GlobalConfigModule,
-      LoggerModule,
-    ],
-    controllers: [MemberController],
-    providers: [MemberService, MemberRepository],
-  })
-  export class MemberModule {}
+  imports: [GlobalConfigModule, LoggerModule],
+  controllers: [MemberController],
+  providers: [MemberService, MemberRepository],
+})
+export class MemberModule {}

@@ -1,10 +1,11 @@
-import { Module } from "@nestjs/common";
-import GlobalConfigService from "./config.service";
+import { Module } from '@nestjs/common';
 import { ConfigModule as NestConfigModule } from '@nestjs/config';
-import ConfigValidate from "./validation.schema";
+
+import GlobalConfigService from './config.service';
+import ConfigValidate from './validation.schema';
 
 @Module({
-    imports: [
+  imports: [
     NestConfigModule.forRoot({
       cache: true,
       isGlobal: true,
@@ -12,7 +13,7 @@ import ConfigValidate from "./validation.schema";
       validate: ConfigValidate,
     }),
   ],
-    providers: [GlobalConfigService],
-    exports: [GlobalConfigService],
-  })
-  export default class GlobalConfigModule {}
+  providers: [GlobalConfigService],
+  exports: [GlobalConfigService],
+})
+export default class GlobalConfigModule {}
