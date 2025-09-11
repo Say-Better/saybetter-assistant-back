@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
 
-import { MemberController } from './user.controller';
+import { MemberController } from './controllers/user.controller';
 import GlobalConfigModule from 'src/common/config/config.module';
 import { LoggerModule } from 'src/common/logger/logger.module';
-import { MemberRepository } from 'src/shared/user/repository/user.repository';
-import { MemberService } from 'src/shared/user/service/user.service';
+import { MemberRepository } from 'src/user/repository/user.repository';
+import { MemberService } from 'src/user/providers/user.service';
 
 @Module({
   imports: [GlobalConfigModule, LoggerModule],
