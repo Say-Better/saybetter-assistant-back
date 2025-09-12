@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 
-import { UserService } from 'src/shared/user/user.service';
+import { UserService } from 'src/shared/member/member.service';
 
 @Injectable()
 export class MemberCurdService {

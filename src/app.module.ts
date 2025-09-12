@@ -8,7 +8,7 @@ import { BaseModule } from './base';
 import { CommonModule } from './common';
 import { ExceptionFilter } from './common/filters';
 import { configuration, loggerOptions } from './config';
-import { MemberModule } from './user/user.module';
+import { MemberModule } from './user/member.module';
 
 @Module({
   imports: [
