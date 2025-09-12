@@ -1,5 +1,6 @@
 import { Gender } from 'src/shared/member';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Conversation } from './conversation.entity';
 
 @Entity('MEMBER')
 export class Member {
@@ -22,7 +23,7 @@ export class Member {
   age!: string;
 
   @Column('tinyint', { nullable: false, default: 0, name: 'gender' })
-  gender!: Gender;
+  gender!: number | Gender;
 
   @Column('timestamp', { nullable: false, default: () => 'CURRENT_TIMESTAMP', name: 'updated_at' })
   updatedAt!: Date;
@@ -30,4 +31,9 @@ export class Member {
   @Column('timestamp', { nullable: false, default: () => 'CURRENT_TIMESTAMP', name: 'created_at' })
   createdAt!: Date;
 
+  /**
+   * Relations
+   */
+  @OneToMany(() => Conversation, (conversation) => conversation.member)
+  conversations?: Conversation[];
 }
