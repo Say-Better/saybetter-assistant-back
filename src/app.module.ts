@@ -4,6 +4,7 @@ import { APP_FILTER, APP_PIPE, RouterModule } from '@nestjs/core';
 import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { LoggerModule } from 'nestjs-pino';
 
+import { CommonModule } from './common';
 import { ExceptionFilter } from './common/filters';
 import { configuration, loggerOptions } from './config';
 import { MemberModule } from './user/user.module';
@@ -21,6 +22,7 @@ import { MemberModule } from './user/user.module';
       }),
       inject: [ConfigService],
     }),
+    CommonModule,
     RouterModule.register([
       {
         path: 'member',
