@@ -5,7 +5,7 @@ import { Repository } from 'typeorm';
 import { Member } from '#entity/mysql';
 
 @Injectable()
-export class UserService {
+export class MemberService {
   constructor(
     @InjectRepository(Member)
     private readonly member: Repository<Member>,
