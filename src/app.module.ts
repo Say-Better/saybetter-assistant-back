@@ -1,14 +1,46 @@
-import { Module } from "@nestjs/common";
-import { AppController } from "./app.controller";
-import { AppService } from "./app.service";
-import GlobalConfigModule from "./common/config/config.module";
-import { LoggerModule } from "./common/logger/logger.module";
-import { MysqlModule } from "./common/db/mysql.module";
-import { MemberModule } from "./module/member/member.module";
+import { Module, ValidationPipe } from '@nestjs/common';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { APP_FILTER, APP_PIPE, RouterModule } from '@nestjs/core';
+import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
+import { LoggerModule } from 'nestjs-pino';
+
+import { BaseModule } from './base';
+import { CommonModule } from './common';
+import { ExceptionFilter } from './common/filters';
+import { configuration, loggerOptions } from './config';
+import { MemberModule } from './user/member.module';
 
 @Module({
-  imports: [GlobalConfigModule, MysqlModule, LoggerModule, MemberModule],
-  controllers: [AppController],
-  providers: [AppService],
+  imports: [
+    LoggerModule.forRoot(loggerOptions),
+    ConfigModule.forRoot({
+      isGlobal: true,
+      load: [configuration],
+    }),
+    TypeOrmModule.forRootAsync({
+      useFactory: (config: ConfigService) => ({
+        ...config.get<TypeOrmModuleOptions>('db'),
+      }),
+      inject: [ConfigService],
+    }),
+    CommonModule,
+    BaseModule,
+    RouterModule.register([
+      {
+        path: 'member',
+        module: MemberModule,
+      },
+    ]),
+  ],
+  providers: [
+    { provide: APP_FILTER, useClass: ExceptionFilter },
+    {
+      provide: APP_PIPE,
+      useValue: new ValidationPipe({
+        transform: true,
+        whitelist: true,
+      }),
+    },
+  ],
 })
 export class AppModule {}
