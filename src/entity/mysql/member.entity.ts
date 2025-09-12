@@ -8,16 +8,16 @@ export class Member {
   @PrimaryGeneratedColumn({ type: 'int', unsigned: true, name: 'id' })
   memberNum!: number;
 
-  @Column('varchar', {nullable: false, length: 255, name: 'user_id'})
+  @Column('varchar', { nullable: false, length: 255, name: 'user_id' })
   id!: string;
 
-  @Column('varchar', {nullable: false, length: 255, name: 'user_password'})
+  @Column('varchar', { nullable: false, length: 255, name: 'user_password' })
   password!: string;
 
-  @Column('text', {nullable: false, name: 'prefer_subject'})
+  @Column('text', { nullable: false, name: 'prefer_subject' })
   preferSubject!: string;
 
-  @Column('varchar', {nullable: false, length: 45, name: 'name'})
+  @Column('varchar', { nullable: false, length: 45, name: 'name' })
   name!: string;
 
   @Column('varchar', { nullable: false, length: 10, name: 'age' })
