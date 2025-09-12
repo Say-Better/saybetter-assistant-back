@@ -1,1 +1,1 @@
-export * from './conversation.interface';
+export type * from './conversation.interface';

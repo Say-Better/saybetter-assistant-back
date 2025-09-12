@@ -1,6 +1,7 @@
 import { Gender } from 'src/shared/member';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { Conversation } from './conversation.entity';
+import { Statement } from './statement.entity';
 
 @Entity('MEMBER')
 export class Member {
@@ -36,4 +37,7 @@ export class Member {
    */
   @OneToMany(() => Conversation, (conversation) => conversation.member)
   conversations?: Conversation[];
+
+  @OneToMany(() => Statement, (statement) => statement.member)
+  statements?: Statement[];
 }

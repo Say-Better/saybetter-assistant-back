@@ -1,5 +1,6 @@
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Member } from "./member.entity";
+import { Statement } from "./statement.entity";
 import { TimeTag } from "src/shared/conversation";
 
 @Entity('CONVERSATION')
@@ -25,4 +26,7 @@ export class Conversation {
   @ManyToOne(() => Member, (member) => member.conversations)
   @JoinColumn({name: 'member', referencedColumnName: 'memberNum'})
   member!: Member;
+
+  @OneToMany(() => Statement, (statement) => statement.conversation)
+  statements?: Statement[];
 }
