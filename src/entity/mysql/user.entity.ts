@@ -1,21 +1,21 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('MEMBER')
 export class Member {
-  @PrimaryGeneratedColumn()
-  memberNum: number;
+  @PrimaryGeneratedColumn({ type: 'int', unsigned: true, name: 'id' })
+  memberNum!: number;
 
-  @Column()
-  id: string;
+  @Column('varchar', {nullable: false, length: 255, name: 'user_id'})
+  id!: string;
 
-  @Column()
-  password: string;
+  @Column('varchar', {nullable: false, length: 255, name: 'user_password'})
+  password!: string;
 
-  @CreateDateColumn()
-  createdAt: Date;
+  @Column('timestamp', { nullable: false, default: () => 'CURRENT_TIMESTAMP', name: 'updated_at' })
+  updatedAt!: Date;
 
-  @CreateDateColumn()
-  updatedAt: Date;
+  @Column('timestamp', { nullable: false, default: () => 'CURRENT_TIMESTAMP', name: 'created_at' })
+  createdAt!: Date;
 
   static getInstance(id: string, password: string) {
     const instance = new Member();
