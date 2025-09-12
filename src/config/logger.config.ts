@@ -23,7 +23,7 @@ export const loggerOptions: Params = {
       autoLogging: {
         ignore: (req) => passUrl.has((<Request>req).originalUrl),
       },
-      // customProps: (req) => (<Request>req).customProps,
+      customProps: (req) => (<Request>req).customProps,
     },
     multistream(
       [

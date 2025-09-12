@@ -17,4 +17,10 @@ export declare global {
       JWT_REFRESH_SECRET: string;
     }
   }
+
+  namespace Express {
+    interface Request {
+      customProps: object;
+    }
+  }
 }
