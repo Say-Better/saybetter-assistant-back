@@ -8,6 +8,7 @@ import { CommonModule } from './common';
 import { ExceptionFilter } from './common/filters';
 import { configuration, loggerOptions } from './config';
 import { MemberModule } from './user/user.module';
+import { BaseModule } from './base';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { MemberModule } from './user/user.module';
       inject: [ConfigService],
     }),
     CommonModule,
+    BaseModule,
     RouterModule.register([
       {
         path: 'member',
