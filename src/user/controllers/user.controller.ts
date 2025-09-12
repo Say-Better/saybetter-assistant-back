@@ -7,7 +7,7 @@ export class MemberController {
   constructor(private readonly memberService: MemberCurdService) {}
 
   @Get()
-  async test() {
-    return await this.memberService.save();
+  async test(): Promise<void> {
+    await this.memberService.save();
   }
 }

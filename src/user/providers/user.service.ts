@@ -6,7 +6,7 @@ import { UserService } from 'src/shared/user/user.service';
 export class MemberCurdService {
   constructor(private readonly memberService: UserService) {}
 
-  async save() {
-    return await this.memberService.save();
+  async save(): Promise<void> {
+    await this.memberService.save();
   }
 }
