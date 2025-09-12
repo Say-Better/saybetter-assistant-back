@@ -1,3 +1,4 @@
+import { Gender } from 'src/shared/member';
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('MEMBER')
@@ -11,20 +12,22 @@ export class Member {
   @Column('varchar', {nullable: false, length: 255, name: 'user_password'})
   password!: string;
 
+  @Column('text', {nullable: false, name: 'prefer_subject'})
+  preferSubject!: string;
+
+  @Column('varchar', {nullable: false, length: 45, name: 'name'})
+  name!: string;
+
+  @Column('varchar', { nullable: false, length: 10, name: 'age' })
+  age!: string;
+
+  @Column('tinyint', { nullable: false, default: 0, name: 'gender' })
+  gender!: Gender;
+
   @Column('timestamp', { nullable: false, default: () => 'CURRENT_TIMESTAMP', name: 'updated_at' })
   updatedAt!: Date;
 
   @Column('timestamp', { nullable: false, default: () => 'CURRENT_TIMESTAMP', name: 'created_at' })
   createdAt!: Date;
 
-  static getInstance(id: string, password: string) {
-    const instance = new Member();
-
-    instance.id = id;
-    instance.password = password;
-    instance.createdAt = new Date();
-    instance.updatedAt = new Date();
-
-    return instance;
-  }
 }
