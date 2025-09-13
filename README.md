@@ -36,7 +36,6 @@ npm run test:e2e
 ```
 +-- bin // Custom tasks
 +-- dist // Source build
-+-- public // Static Files
 +-- src
 |   +-- config // Environment Configuration
 |   +-- entity // TypeORM Entities
