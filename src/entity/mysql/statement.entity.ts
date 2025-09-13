@@ -1,33 +1,23 @@
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { Member } from './member.entity';
-import { Conversation } from './conversation.entity';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 import { Bookmark, Speaker } from 'src/shared/statement';
 
 @Entity('STATEMENT')
 export class Statement {
-  @PrimaryGeneratedColumn({ type: 'int', unsigned: true, name: 'statement_num' })
+  @PrimaryGeneratedColumn({ type: 'int', unsigned: true })
   statementNum!: number;
 
-  @Column('tinyint', { nullable: false, default: 0, name: 'bookmark' })
+  @Column('tinyint', { nullable: false, default: 0 })
   bookmark!: number | Bookmark;
 
-  @Column('tinyint', { nullable: false, default: 1, name: 'speaker' })
+  @Column('tinyint', { nullable: false, default: 1 })
   speaker!: number | Speaker;
 
-  @Column('timestamp', { nullable: false, default: () => 'CURRENT_TIMESTAMP', name: 'updated_at' })
+  @Column('timestamp', { nullable: false, default: () => 'CURRENT_TIMESTAMP' })
   updatedAt!: Date;
 
-  @Column('timestamp', { nullable: false, default: () => 'CURRENT_TIMESTAMP', name: 'created_at' })
+  @Column('timestamp', { nullable: false, default: () => 'CURRENT_TIMESTAMP' })
   createdAt!: Date;
 
-  /**
-   * Relations
-   */
-  @ManyToOne(() => Member, (member) => member.statements)
-  @JoinColumn({ name: 'member', referencedColumnName: 'memberNum' })
-  member!: Member;
-
-  @ManyToOne(() => Conversation, (conversation) => conversation.statements)
-  @JoinColumn({ name: 'conversation', referencedColumnName: 'conversationNum' })
-  conversation!: Conversation;
+  @Column('int', { nullable: false })
+  memberNum!: number;
 }
