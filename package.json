@@ -18,8 +18,8 @@
     "start:repl": "nest start --entryFile repl",
     "=============[Build]=============": "",
     "build": "nest build",
-    "doc": "",
-    "doc:api": "",
+    "doc": "compodoc -p tsconfig.json -s -d docs",
+    "doc:api": "npm run build && node dist/swagger",
     "prestart": "npm run lint && npm run build",
     "=============[Test]=============": "",
     "test": "jest",
@@ -58,6 +58,7 @@
     "typeorm": "^0.3.26"
   },
   "devDependencies": {
+    "@compodoc/compodoc": "^1.1.30",
     "@eslint/eslintrc": "^3.2.0",
     "@eslint/js": "^9.18.0",
     "@nestjs/cli": "^11.0.0",
