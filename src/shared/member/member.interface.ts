@@ -4,8 +4,6 @@ export interface Member {
   name: string;
   password: string;
   age: string;
-  gender: Gender;
+  gender: number;
   preferSubject: string;
 }
-
-export type Gender = 0 | 1;
