@@ -3,18 +3,21 @@ import { TimeTag } from 'src/shared/conversation';
 
 @Entity('CONVERSATION')
 export class Conversation {
-  @PrimaryGeneratedColumn({ type: 'int', unsigned: true, name: 'conversation_num' })
+  @PrimaryGeneratedColumn({ type: 'int', unsigned: true })
   conversationNum!: number;
 
-  @Column('varchar', { nullable: false, length: 45, name: 'climate' })
+  @Column('int', { nullable: false })
+  memberNum!: number;
+
+  @Column('varchar', { nullable: false, length: 45, })
   climate!: string;
 
-  @Column('varchar', { nullable: false, length: 10, name: 'timeTag' })
+  @Column('varchar', { nullable: false, length: 10 })
   timeTag!: string | TimeTag;
 
-  @Column('timestamp', { nullable: false, default: () => 'CURRENT_TIMESTAMP', name: 'updated_at' })
+  @Column('timestamp', { nullable: false, default: () => 'CURRENT_TIMESTAMP' })
   updatedAt!: Date;
 
-  @Column('timestamp', { nullable: false, default: () => 'CURRENT_TIMESTAMP', name: 'created_at' })
+  @Column('timestamp', { nullable: false, default: () => 'CURRENT_TIMESTAMP' })
   createdAt!: Date;
 }
