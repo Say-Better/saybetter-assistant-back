@@ -24,10 +24,10 @@ export class Member {
   @Column('tinyint', { nullable: false, default: 0 })
   gender!: number;
 
-  @Column('timestamp', { nullable: false, default: new Date() })
+  @Column('timestamp', { nullable: false, default: 'CURRENT_TIMESTAMP' })
   updatedAt!: Date;
 
-  @Column('timestamp', { nullable: false, default: new Date() })
+  @Column('timestamp', { nullable: false, default: 'CURRENT_TIMESTAMP' })
   createdAt!: Date;
 
   constructor(data?: Partial<Member>) {
