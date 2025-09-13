@@ -1,6 +1,4 @@
-import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
-import { Member } from './member.entity';
-import { Statement } from './statement.entity';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 import { TimeTag } from 'src/shared/conversation';
 
 @Entity('CONVERSATION')
@@ -19,14 +17,4 @@ export class Conversation {
 
   @Column('timestamp', { nullable: false, default: () => 'CURRENT_TIMESTAMP', name: 'created_at' })
   createdAt!: Date;
-
-  /**
-   * Relations
-   */
-  @ManyToOne(() => Member, (member) => member.conversations)
-  @JoinColumn({ name: 'member', referencedColumnName: 'memberNum' })
-  member!: Member;
-
-  @OneToMany(() => Statement, (statement) => statement.conversation)
-  statements?: Statement[];
 }

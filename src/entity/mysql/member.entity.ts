@@ -1,43 +1,51 @@
-import { Gender } from 'src/shared/member';
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
-import { Conversation } from './conversation.entity';
-import { Statement } from './statement.entity';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { SignUp } from 'src/shared/member/member.dto';
 
 @Entity('MEMBER')
 export class Member {
-  @PrimaryGeneratedColumn({ type: 'int', unsigned: true, name: 'id' })
+  @PrimaryGeneratedColumn({ type: 'int', unsigned: true })
   memberNum!: number;
 
-  @Column('varchar', { nullable: false, length: 255, name: 'user_id' })
+  @Column('varchar', { nullable: false, length: 255 })
   id!: string;
 
-  @Column('varchar', { nullable: false, length: 255, name: 'user_password' })
+  @Column('varchar', { nullable: false, length: 255 })
   password!: string;
 
-  @Column('text', { nullable: false, name: 'prefer_subject' })
+  @Column('text', { nullable: false })
   preferSubject!: string;
 
-  @Column('varchar', { nullable: false, length: 45, name: 'name' })
+  @Column('varchar', { nullable: false, length: 45 })
   name!: string;
 
-  @Column('varchar', { nullable: false, length: 10, name: 'age' })
+  @Column('varchar', { nullable: false, length: 10 })
   age!: string;
 
-  @Column('tinyint', { nullable: false, default: 0, name: 'gender' })
-  gender!: number | Gender;
+  @Column('tinyint', { nullable: false, default: 0 })
+  gender!: number;
 
-  @Column('timestamp', { nullable: false, default: () => 'CURRENT_TIMESTAMP', name: 'updated_at' })
+  @Column('timestamp', { nullable: false, default: new Date() })
   updatedAt!: Date;
 
-  @Column('timestamp', { nullable: false, default: () => 'CURRENT_TIMESTAMP', name: 'created_at' })
+  @Column('timestamp', { nullable: false, default: new Date() })
   createdAt!: Date;
 
-  /**
-   * Relations
-   */
-  @OneToMany(() => Conversation, (conversation) => conversation.member)
-  conversations?: Conversation[];
+  constructor(data?: Partial<Member>) {
+    if (data) {
+      Object.assign(this, data);
+    }
+  }
 
-  @OneToMany(() => Statement, (statement) => statement.member)
-  statements?: Statement[];
+  static getInstanceForJoin(dto: SignUp): Member {
+    return new Member({
+      id: dto.memberId,
+      password: dto.password,
+      preferSubject: dto.preferSubject,
+      name: dto.name,
+      age: dto.age,
+      gender: dto.gender,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    });
+  }
 }
