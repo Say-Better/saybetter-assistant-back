@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-return */
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
@@ -30,11 +31,13 @@ export class ConversationService {
       timeTag = 'Night';
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
     const newConversation = Conversation.getInstanceForSave(memberNum, weather, timeTag);
 
     await this.conversation.save(newConversation);
 
     for (const item of body.contents) {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
       await this.statementService.saveStatement(body.memberNum, newConversation.conversationNum, item.content, item.speaker);
     }
 
