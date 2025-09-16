@@ -1,4 +1,4 @@
-import { IsNumber, IsString } from 'class-validator';
+import { IsArray, IsNumber, IsString } from 'class-validator';
 
 import { Speaker } from '../statement';
 
@@ -6,6 +6,7 @@ export class ConversationRequest {
   @IsNumber()
   memberNum!: number;
 
+  @IsArray()
   contents!: StatementRequest[];
 }
 

@@ -12,8 +12,8 @@ export class Statement {
   @Column('tinyint', { nullable: false, default: 0 })
   bookmark!: number | Bookmark;
 
-  @Column('tinyint', { nullable: false, default: 1 })
-  speaker!: number | Speaker;
+  @Column('varchar', { nullable: false, default: 'M' })
+  speaker!: string | Speaker;
 
   @Column('text', { nullable: false })
   content!: string;
