@@ -12,6 +12,9 @@ export class Statement {
   @Column('tinyint', { nullable: false, default: 1 })
   speaker!: number | Speaker;
 
+  @Column('text', { nullable: false })
+  content!: string;
+
   @Column('timestamp', { nullable: false, default: () => 'CURRENT_TIMESTAMP' })
   updatedAt!: Date;
 
