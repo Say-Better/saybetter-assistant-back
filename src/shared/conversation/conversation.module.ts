@@ -2,11 +2,13 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { Conversation } from '#entity/mysql';
+import { ConversationController } from './conversation.controller';
+import { ConversationService } from './conversation.service';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Conversation])],
-  controllers: [],
-  providers: [],
-  exports: [],
+  controllers: [ConversationController],
+  providers: [ConversationService],
+  exports: [ConversationService],
 })
 export class ConversationModule {}

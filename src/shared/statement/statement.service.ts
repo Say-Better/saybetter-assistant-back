@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
 import { Statement } from '#entity/mysql';
+import { Speaker } from './statement.interface';
 
 @Injectable()
 export class StatementService {
@@ -26,5 +27,16 @@ export class StatementService {
     return await this.statementRepository.find({
       where: { memberNum, bookmark: 1 },
     });
+  }
+
+  async saveStatement(memberNum: number, conversationNum: number, content: string, speaker: Speaker): Promise<Statement> {
+    const newStatement: Statement = new Statement();
+    newStatement.memberNum = memberNum;
+    newStatement.conversationNum = conversationNum;
+    newStatement.content = content;
+    newStatement.speaker = speaker;
+    newStatement.bookmark = 0;
+
+    return await this.statementRepository.save(newStatement);
   }
 }
