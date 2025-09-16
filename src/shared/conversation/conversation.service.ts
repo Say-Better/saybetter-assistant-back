@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unsafe-return */
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
@@ -7,6 +8,7 @@ import { ConversationInfo, ConversationRequest } from './conversation.dto';
 import { TimeTag } from './conversation.interface';
 import { StatementService } from '../statement/statement.service';
 
+@Injectable()
 export class ConversationService {
   constructor(
     @InjectRepository(Conversation)
