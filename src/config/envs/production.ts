@@ -14,7 +14,7 @@ export const config = {
       slaves: [
         {
           // fix if necessary
-          host: 'slaveHost',
+          host: 'nest-mysql',
           port: 3306,
           username: 'username',
           password: process.env.DB_PASSWORD || 'password',
