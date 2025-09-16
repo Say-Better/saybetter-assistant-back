@@ -30,10 +30,7 @@ export class ConversationService {
       timeTag = 'Night';
     }
 
-    const newConversation = new Conversation();
-    newConversation.memberNum = memberNum;
-    newConversation.climate = weather;
-    newConversation.timeTag = timeTag;
+    const newConversation = Conversation.getInstanceForSave(memberNum, weather, timeTag);
 
     await this.conversation.save(newConversation);
 
@@ -41,6 +38,6 @@ export class ConversationService {
       await this.statementService.saveStatement(body.memberNum, newConversation.conversationNum, item.content, item.speaker);
     }
 
-    return new ConversationInfo(newConversation);
+    return newConversation;
   }
 }
