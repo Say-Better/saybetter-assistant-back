@@ -4,7 +4,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
 import { Conversation } from '#entity/mysql';
-import { ConversationInfo, ConversationRequest } from './conversation.dto';
+import { ConversationDetailInfo, ConversationInfo, ConversationRequest } from './conversation.dto';
 import { TimeTag } from './conversation.interface';
 import { StatementService } from '../statement/statement.service';
 
@@ -16,10 +16,34 @@ export class ConversationService {
     private readonly statementService: StatementService,
   ) {}
 
+  async getConversations(memberNum: number): Promise<ConversationDetailInfo[]> {
+    const conversations = await this.conversation.find({
+      where: { memberNum },
+      order: { createdAt: 'DESC' },
+    });
+
+    return await Promise.all(
+      conversations.map(async (conversation) => {
+        const statementCount = await this.statementService.getStatementCountByConversationNum(conversation.conversationNum);
+        const statement = await this.statementService.getLatestStatementByConversationNum(conversation.conversationNum);
+        const detail = new ConversationDetailInfo();
+        detail.conversationNum = conversation.conversationNum;
+        detail.content = statement;
+        detail.statementCount = statementCount;
+        detail.createdAt = conversation.createdAt;
+        return detail;
+      }),
+    );
+  }
+
   async saveConversation(body: ConversationRequest): Promise<ConversationInfo> {
     const weather = 'Sunny';
     const now = new Date();
-    const hour = now.getHours();
+    const utc = now.getTime() + now.getTimezoneOffset() * 60 * 1000; // UTC 시간 밀리초
+    const KST_DIFF = 9 * 60 * 60 * 1000; // 9시간을 밀리초로 환산
+    const kstNow = new Date(utc + KST_DIFF); // KST 시간
+    const hour = kstNow.getHours();
+
     const memberNum = body.memberNum;
     let timeTag: TimeTag;
 
@@ -33,13 +57,10 @@ export class ConversationService {
       timeTag = 'Night';
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
     const newConversation = Conversation.getInstanceForSave(memberNum, weather, timeTag);
-
     await this.conversation.save(newConversation);
 
     for (const item of body.contents) {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
       await this.statementService.saveStatement(body.memberNum, newConversation.conversationNum, item.content, item.speaker);
     }
 

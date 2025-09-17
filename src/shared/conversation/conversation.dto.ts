@@ -17,6 +17,13 @@ export class StatementRequest {
   speaker!: Speaker;
 }
 
+export class ConversationDetailInfo {
+  conversationNum!: number;
+  content!: string;
+  statementCount!: number;
+  createdAt!: Date;
+}
+
 export class ConversationInfo {
   @IsNumber()
   conversationNum!: number;

@@ -1,11 +1,16 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, Query } from '@nestjs/common';
 
-import { ConversationInfo, ConversationRequest } from './conversation.dto';
+import { ConversationDetailInfo, ConversationInfo, ConversationRequest } from './conversation.dto';
 import { ConversationService } from './conversation.service';
 
 @Controller('conversation')
 export class ConversationController {
   constructor(private readonly conversationService: ConversationService) {}
+
+  @Get()
+  async getConversations(@Query('memberNum') memberNum: number): Promise<ConversationDetailInfo[]> {
+    return await this.conversationService.getConversations(memberNum);
+  }
 
   @Post('/save')
   async saveConversation(@Body() body: ConversationRequest): Promise<ConversationInfo> {
